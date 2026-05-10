@@ -1,0 +1,81 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%; /* Pure Black */
+    --foreground: 54 100% 50%; /* Accessibility Yellow */
+    --card: 0 0% 5%;
+    --card-foreground: 54 100% 50%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 54 100% 50%;
+    --primary: 54 100% 50%; /* Bright Yellow */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 54 100% 70%;
+    --accent: 54 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 54 100% 30%;
+    --input: 54 100% 20%;
+    --ring: 54 100% 50%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/30;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.blind-first-button {
+  @apply relative overflow-hidden transition-all duration-300 active:scale-95 touch-none select-none;
+  @apply flex flex-col items-center justify-center text-center p-6 rounded-3xl border-8;
+  min-height: 80px;
+  min-width: 80px;
+}
+
+.viewfinder-container {
+  @apply relative w-full h-full overflow-hidden bg-black flex items-center justify-center;
+}
+
+.camera-feed {
+  @apply w-full h-full object-cover;
+}
+
+.scan-line {
+  @apply absolute left-0 w-full h-3 bg-primary/60 shadow-[0_0_30px_rgba(253,224,71,0.9)];
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.pulsing-dot {
+  @apply w-6 h-6 rounded-full bg-primary;
+  animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .2; transform: scale(2.5); }
+}
+
+button:focus {
+  @apply outline-none ring-[12px] ring-white;
+}
+
+/* Accessibility Focus */
+.sr-only:focus {
+  @apply not-sr-only bg-white text-black p-4 z-[100] fixed top-0;
+}
